@@ -1,0 +1,56 @@
+package com.example.myapplication;
+
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        final TextView textView = findViewById(R.id.textView);
+
+        // Fade In Animation
+        ObjectAnimator fadeIn = ObjectAnimator.ofFloat(textView, "alpha", 0f, 1f);
+        fadeIn.setDuration(2000); // duration in milliseconds
+
+        // Fade Out Animation
+        ObjectAnimator fadeOut = ObjectAnimator.ofFloat(textView, "alpha", 1f, 0f);
+        fadeOut.setDuration(2000); // duration in milliseconds
+        fadeOut.setStartDelay(2000); // delay for fade out to start after fade in
+
+        // Combine Animations
+        AnimatorSet animatorSet = new AnimatorSet();
+        animatorSet.playSequentially(fadeIn, fadeOut);
+        animatorSet.start();
+    }
+}
+
+
+
+
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello, World!"
+        android:textSize="24sp"
+        android:layout_centerInParent="true"/>
+
+</RelativeLayout>
+
